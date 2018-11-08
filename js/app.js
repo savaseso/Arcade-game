@@ -1,17 +1,50 @@
 //Hero Class
 class Hero {
     constructor(){                          
-        this.x = 0;
-        this.y = 0;
         this.sprite = 'images/char-boy.png';
+        this.step = 101; //distance between blocks X axis
+        this.jump = 83;     //distance between blocks Y axis
+        this.startX = this.step * 2; //places our character to the starting point X
+        this.startY = (this.jump * 5)-20; //places our character to the starting point Y
+        this.x = this.startX; 
+        this.y = this.startY;
 
     }
      //Draw player sprite on current X and Y coord position
     render(){
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
+     /**Handle keyboard input
+    *Update players X and Y property according to input
+    * @param {string} input - direction to travel
+    */
+    handleInput(input){
+        switch(input){
+            case 'left':
+                if(this.x > 0){   //boundaries left side
+                this.x -= this.step;
+                }
+                break;
+            case 'up':
+                if (this.y > this.jump){
+                this.y -= this.jump;} //boundaries top
+                break;
+            case 'right':          
+                if (this.x<this.step*4){ //boundaries right side
+                this.x += this.step;}
+                break;
+            case 'down':
+                if (this.y < this.jump*4){ //boundaries at the bottom
+                this.y += this.jump;}
+                break;
+        }
+
+    }
 }
+
 const player = new Hero();
+
+
         //Methods
             //Update position
                 //Check collision here
@@ -20,8 +53,7 @@ const player = new Hero();
                     //Did player x and y reach final title?
                 //Render
                     //Draw player sprite on current X and Y coord position
-                //Handle keyboard input
-                    //Update players X and Y property according to input
+               
                 //Reset hero
                     //set x and y to starting x and y
 
@@ -30,8 +62,8 @@ var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
-    //X pos
-    //Y pos
+    this.x = 0;
+    this.y = 0;
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
