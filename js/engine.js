@@ -90,10 +90,10 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-      /*  allEnemies.forEach(function(enemy) {
+        allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update(); */
+        //player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -149,13 +149,20 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-       /*allEnemies.forEach(function(enemy) {
-            enemy.render();
-        });*/
+        allEnemies.forEach(function(enemy) {
+             enemy.render();
+         });
 
         player.render();
     }
+    const bug1 = new Enemy(-101,0, 200);
+    const bug2 = new Enemy(-101,83, 300);
+    const bug3 = new Enemy((-101*2.5), 83, 300);
+    const bug4 = new Enemy(-230,166,250);
+    const bug5 = new Enemy (-101,166,250);
 
+    const allEnemies = [];
+    allEnemies.push(bug1,bug2,bug3,bug4,bug5);
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.

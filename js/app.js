@@ -27,7 +27,7 @@ class Hero {
                 break;
             case 'up':
                 if (this.y > this.jump){
-                this.y -= this.jump;} //boundaries top
+                this.y -= this.jump;}   //boundaries top
                 break;
             case 'right':          
                 if (this.x<this.step*4){ //boundaries right side
@@ -45,6 +45,7 @@ class Hero {
 const player = new Hero();
 
 
+
         //Methods
             //Update position
                 //Check collision here
@@ -58,16 +59,18 @@ const player = new Hero();
                     //set x and y to starting x and y
 
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(x,y,speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-
-    this.x = 0;
-    this.y = 0;
-
+    this.x = x;
+    this.y = y+55;
+    this.speed=speed;
+    this.sprite = 'images/enemy-bug.png';
+    this.step = 101;
+    this.boundary = this.step*5
+    this.resetPos =-this.step
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
 };
 
 // Update the enemy's position, required method for game
@@ -78,9 +81,16 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 
     //if enemy not passed boundary
+    if (this.x < this.boundary){
         //mover forward
         //increment x by speed *dt
-    //else 
+        this.x += this.speed * dt;
+    } else {        //Reset position to start
+
+        this.x = this.resetPos;
+    }
+        
+     
         //Reset position to start
 };
 
