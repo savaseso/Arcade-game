@@ -22,7 +22,16 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime;
+        lastTime,
+        id;
+    const modal = document.querySelector('.modal_background')
+    const replay = document.querySelector('.modal_button')
+    replay.addEventListener('click',function(){
+        modal.classList.toggle('hide');
+        player.reset();
+        player.victory = false;
+        win.requestAnimationFrame(main);
+    });
 
     canvas.width = 505;
     canvas.height = 606;
@@ -55,7 +64,11 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
-        win.requestAnimationFrame(main);
+        if (player.victory===true){
+            win.cancelAnimationFrame(id)
+            modal.classList.toggle('hide');
+        }else{
+       id = win.requestAnimationFrame(main)}
     }
 
     /* This function does some initial setup that should only occur once,
@@ -91,10 +104,10 @@ var Engine = (function(global) {
      */
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
-            enemy.update(dt);
-        });
-        //player.update();
-    }
+             enemy.update(dt);
+         });
+         player.update();
+     }
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
@@ -155,18 +168,12 @@ var Engine = (function(global) {
 
         player.render();
     }
-    const bug1 = new Enemy(-101,0, 200);
-    const bug2 = new Enemy(-101,83, 300);
-    const bug3 = new Enemy((-101*2.5), 83, 300);
-    const bug4 = new Enemy(-230,166,250);
-    const bug5 = new Enemy (-101,166,250);
-
-    const allEnemies = [];
-    allEnemies.push(bug1,bug2,bug3,bug4,bug5);
+    
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
+
     function reset() {
         // noop
     }

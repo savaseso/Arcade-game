@@ -5,9 +5,10 @@ class Hero {
         this.step = 101; //distance between blocks X axis
         this.jump = 83;     //distance between blocks Y axis
         this.startX = this.step * 2; //places our character to the starting point X
-        this.startY = (this.jump * 5)-20; //places our character to the starting point Y
+        this.startY = (this.jump * 4)+55; //places our character to the starting point Y
         this.x = this.startX; 
         this.y = this.startY;
+        this.victory = false;
 
     }
      //Draw player sprite on current X and Y coord position
@@ -40,17 +41,30 @@ class Hero {
         }
 
     }
+    update() {
+	
+        for(let enemy of allEnemies){
+            if (this.y===enemy.y && (enemy.x + enemy.step/2>this.x && enemy.x<this.x+this.step/2)){
+             this.reset();
+            } 
+        }
+        if (this.y===55){
+            this.victory=true;
+        }
+    }
+    reset(){
+        this.y=this.startY;
+        this.x=this.startX;
+    }
+
 }
 
 const player = new Hero();
 
 
-
         //Methods
-            //Update position
-                //Check collision here
-                    //Did player X and Y collide with the enemy?
-                //Check Win here
+    
+
                     //Did player x and y reach final title?
                 //Render
                     //Draw player sprite on current X and Y coord position
@@ -72,6 +86,14 @@ var Enemy = function(x,y,speed) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
 };
+const bug1 = new Enemy(-101,0, 200);
+const bug2 = new Enemy(-101,83, 300);
+const bug3 = new Enemy((-101*2.5), 83, 300);
+const bug4 = new Enemy(-230,166,250);
+const bug5 = new Enemy (-101,166,250);
+
+const allEnemies = [];
+allEnemies.push(bug1,bug2,bug3,bug4,bug5);
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -122,3 +144,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
