@@ -17,7 +17,7 @@ class Hero {
     }
      /**Handle keyboard input
     *Update players X and Y property according to input
-    * @param {string} input - direction to travel
+    * Direction to travel
     */
     handleInput(input){
         switch(input){
@@ -41,49 +41,42 @@ class Hero {
         }
 
     }
+
     update() {
-	
+	// Checking the collision here
         for(let enemy of allEnemies){
+            //Did player x and y collide with the enemy?
             if (this.y===enemy.y && (enemy.x + enemy.step/2>this.x && enemy.x<this.x+this.step/2)){
              this.reset();
             } 
         }
+        //Did player x and y reach the final line?
         if (this.y===55){
             this.victory=true;
         }
     }
+    //reset hero
     reset(){
+        //Set x and y to Starting x and y
         this.y=this.startY;
         this.x=this.startX;
     }
 
 }
 
-const player = new Hero();
-
-
-        //Methods
-    
-
-                    //Did player x and y reach final title?
-                //Render
-                    //Draw player sprite on current X and Y coord position
-               
-                //Reset hero
-                    //set x and y to starting x and y
+const player = new Hero();      
 
 // Enemies our player must avoid
 var Enemy = function(x,y,speed) {
     // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
     this.x = x;
-    this.y = y+55;
+    this.y = y+55; //center
     this.speed=speed;
-    this.sprite = 'images/enemy-bug.png';
+    this.sprite = 'images/enemy-bug.png'; // The image/sprite for our enemies, this uses
     this.step = 101;
     this.boundary = this.step*5
     this.resetPos =-this.step
-    // The image/sprite for our enemies, this uses
+   
     // a helper we've provided to easily load images
 };
 const bug1 = new Enemy(-101,0, 200);
@@ -107,13 +100,12 @@ Enemy.prototype.update = function(dt) {
         //mover forward
         //increment x by speed *dt
         this.x += this.speed * dt;
-    } else {        //Reset position to start
-
+    } else {
+        //Reset position to start
         this.x = this.resetPos;
     }
         
      
-        //Reset position to start
 };
 
 // Draw the enemy on the screen, required method for game
@@ -121,14 +113,6 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
-
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
 
 
 

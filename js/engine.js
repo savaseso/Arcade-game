@@ -24,9 +24,10 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime,
         id;
-    const modal = document.querySelector('.modal_background')
-    const replay = document.querySelector('.modal_button')
-    replay.addEventListener('click',function(){
+        
+    const modal = document.querySelector('.modal_background')  //modal    
+    const replay = document.querySelector('.modal_button')  //modal
+    replay.addEventListener('click',function(){             //modal
         modal.classList.toggle('hide');
         player.reset();
         player.victory = false;
