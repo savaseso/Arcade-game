@@ -11,6 +11,10 @@ It is all about crossing the bugs and reach the Water, and try not to touch a Bu
 
 HOW TO PLAY THE GAME:
 
+-Clone the repo https://github.com/savaseso/Arcade-game.git
+
+-Open index.html in a browser
+
 -Use arrows to move your character
 
 -Reach the water without interacting with bugs
