@@ -2,6 +2,7 @@
 
 The game was built as a Udacity Course project(FEND)
 Try here: https://savaseso.github.io/Arcade-game/ 
+
 GETTING STARTED:
 
 Uses starter code provided by Udacity to assist with a basic HTML, CSS, and JS files.
